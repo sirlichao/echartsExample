@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>echartX轴的字体展示</title>
+	<script src="echarts/dist/echarts.js"></script>
+</head>
+<body>
+	<div id="mian" style="height: 400px; width: 500px"></div>
+	<script>
+		var myChart = echarts.init(document.getElementById('mian'));
+		var data ={
+			time:[ '一二三四五六', '一二三四五', '二三四五', '二三四五六七八九',
+                                    '二三四五一七八九十' ],
+            data:[40,25,60,40,80]
+		}
+		var option={
+			title:{
+				text:"X轴字体溢出设置"
+			},
+			xAxis:{
+				show:true,
+				type:'category',
+				data:data.time,
+				axisLabel:{
+					interval:0,
+					formatter:function(params){
+						//var str = params.slice(0,2);
+						//return str+"......."
+						var newParamsName = "";
+						var paramsNameNumber = params.length;
+						var provideNumber = 4;
+						var rowNumber = Math.ceil(paramsNameNumber/provideNumber);
+						if (paramsNameNumber>provideNumber) {
+							for(var p=0;p<rowNumber;p++){
+								var tempStr = "";
+								var start = p*provideNumber;
+								var end = start+provideNumber;
+								if(p==rowNumber-1){
+									tempStr= params.substring(start,paramsNameNumber)
+								}else{
+									tempStr = params.substring(start,end)+'\n'
+								}
+								return newParamsName
+							}
+						}
+					}
+				}
+			},
+			yAxis:{
+				type:"value"
+			},
+			series:{
+				name:'销量',
+				type:'line',
+				data:data.data
+			}
+		}
+		myChart.setOption(option);
+	</script>
+</body>
+</html>

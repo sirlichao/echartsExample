@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>梯形图</title>
+	<script src="../echarts/dist/echarts.js"></script>
+</head>
+<body>
+	<div id="echart" style="height: 400px"></div>
+	<script>
+		let mychart = echarts.init(document.getElementById('echart'));
+		let option = {
+	        title: {
+	        text: '台风各维度数据',
+	        x: 'center'
+		    },
+		    toolbox: {
+		        show : true,
+		        feature : {
+		            dataView : {show: true, readOnly: false},
+		            magicType : {show: true, type: [ 'bar','line']},
+		            restore : {show: true},
+		            saveAsImage : {show: true}
+		        }
+		    },
+		    tooltip: {
+		        formatter: 'Group {a}: ({c})'
+		    },
+	};
+	let data = {
+		xAxisData:['台风1', '台风2', '台风3', '台风4', '台风5', '台风6', '台风8','台风9'],
+		seriesData:[
+        {
+            name:'A',
+            data:[1, 2, 3, 4, 5,6,7,8],
+            yAxisN:{
+                name: '移动速度（公里/小时）'
+            }
+        },
+        {
+            name:'B',
+            data:[1, 2, 3, 4, 5,6,7,8],
+            yAxisN:{
+                name: '气压（百帕）'
+            }
+        },
+        {
+            name:'C',
+            data:[1, 2, 3, 4, 5,6,7,8],
+            yAxisN:{
+                name: '气压（百帕）'
+            }
+        }
+    ]
+	}
+	var chartOption = {};
+	data.seriesData.forEach(function(item,index){
+		chartOption.grid = chartOption.grid || [];
+		chartOption.grid.push({
+		        x: '7%',
+		        y: '10%',
+		        show: true,
+		        top: 100/data.seriesData.length*index + '%',
+		        width: '100%',
+		        height: 80/data.seriesData.length+ '%',
+		        left: '5%',
+		        right:'50%'
+		});
+		chartOption.xAxis = chartOption.xAxis || [];
+		chartOption.xAxis.push({
+			gridIndex: index,
+		    type: 'category',
+		    min: 0,
+		    max: 8,
+		    axisLabel:
+		    	index==(data.seriesData.length-1)?{show:true}:{show:false},//不显示坐标值
+		    splitLine:index==(data.seriesData.length-1)?{show:true}:{show:false},//不显示区域分割线
+		    axisTick:index==(data.seriesData.length-1)?{show:true}:{show:false}, //不显示刻度
+		    data: data.xAxisData
+		});
+		chartOption.yAxis = chartOption.yAxis || [];
+		chartOption.yAxis.push({
+			gridIndex: index,
+		    type: 'value',
+		    name: item.yAxisN.name,
+		    nameLocation: 'middle',
+		    nameGap: 25,
+		    position: 'left'
+		});
+		chartOption.series = chartOption.series || [];
+		chartOption.series.push({
+			name: item.name,
+		    //type: 'scatter',
+		    type:'line',
+            step: 'scatter',
+		    xAxisIndex: index,
+		    yAxisIndex: index,
+		    data:item.data
+		})
+	})
+	 Object.assign(option,chartOption);
+	 mychart.setOption(option);
+	</script>
+</body>
+</html>

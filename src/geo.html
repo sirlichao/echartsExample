@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>地图</title>
+	<script src="../echarts/dist/echarts.js"></script>
+	<script src ="../js/china.js"></script>
+</head>
+<body>
+	<div id="geo" style="height: 400px"></div>
+	<script>
+		var myChart = echarts.init(document.getElementById('geo'));
+		var colors = ['orange', '#5793f3','purple'];
+		let option = {
+    		color: colors,
+    		tooltip: {
+        		// trigger: 'axis'
+    		},
+    		toolbox: {
+        		'show': true,
+        		orient: 'vertical',
+        		x: 'right',
+        		y: 'center',
+        		'feature': {
+            		'mark': {
+                		'show': true
+            		},
+            		'dataView': {
+                		'show': true,
+                		'readOnly': true
+            		},
+            		'magicType': {
+                		'show': true,
+                		'type': ['line', 'bar', 'stack', 'tiled']
+            		},
+            		'restore': {
+                		'show': true
+           	 		},
+            		'saveAsImage': {
+                		'show': true
+            		}
+        		}
+    		},
+    		title: {
+        		// text: '某公司产品年销量情况'
+    		},
+    		legend: {
+        		data: ['销量']
+    		},
+   	 		xAxis: {
+        		// boundaryGap: false,
+        		data: ['','产品a', '产品b', '产品c', '产品3','', '产品4', '产品5', '产品6', '产品7', '产品8', '产品9','产品10','']
+    		},
+    		yAxis: {
+        		type: 'value',
+        		name: '销量（万）',
+        		min: 0,
+        		max: 60,
+        		position: 'left',
+        		axisLine: {
+
+        		}
+    		},
+    		series: [{
+            	name: '销量',
+            	type: 'bar',
+            	smooth:true,
+            	markArea: {
+                	silent:  true,
+                	data: [
+                    	[{
+                        	name: ['A地区'],
+                        	xAxis: [0]
+                    	}, {
+                        	xAxis: [5]
+                    	}]
+                	]
+            	},
+
+            	data: [,5, 20, 36, 22, ,10, 20, 22, 33, 44, 55, 33,]
+        	}
+        	,{
+            	name: '销量',
+            	type: 'line',
+            	markArea: {
+                	silent:  true,
+                	data: [
+                    	[{
+                        	name: ['B地区'],
+                        	xAxis: [5]
+                    	}, {
+                        	xAxis: [14]
+                    	}]
+
+                	]
+            	},
+        	}
+        	,{
+        	    name:'预购队列',
+        	    type:'bar',
+
+        	    data: [5, 20, 36, 22, 10, 20, 22, 33, 44, 55, 33]
+        	},
+      
+    		]
+		};
+		myChart.setOption(option);
+	</script>
+</body>
+</html>

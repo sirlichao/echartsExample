@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>分组展示</title>
+	<script src="../echarts/dist/echarts.js"></script>
+</head>
+<body>
+	<div id="echart" style="height: 400px; width: auto;"></div>
+	<script>
+		let myChart = echarts.init(document.getElementById('echart'));
+		let option = {
+		    tooltip : {
+		        trigger: 'axis'
+		    },
+		    legend: {
+		        //data:['蒸发量','降水量']
+		    },
+		    toolbox: {
+		        show : true,
+		        feature : {
+		            dataView : {show: true, readOnly: false},
+		            magicType : {show: true, type: ['line', 'bar']},
+		            restore : {show: true},
+		            saveAsImage : {show: true}
+		        }
+		    },
+		    grid:{
+		        show:true,
+		    },
+		    calculable : true,
+		    xAxis : [
+		        {
+		            type : 'category',
+		            data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月',
+		            '1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月',
+		            '1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'
+		            ,'1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月',
+		            '1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月',
+		            '1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+		        },
+		        {
+		            type : 'category',
+		            data : ['兴隆集团','山水集团',],
+		            offset:30,
+		            axisTick:{
+		                show:true,
+		                 inside:true,
+		                //alignWithLabel: true,
+		                length:10
+		            },
+		            splitArea:{
+		                show:true
+		            },
+		            axisLine:{
+		              onZero: false,
+		              show:true  
+		            },
+		        },
+		        {
+		            type : 'category',
+		            //offset:20,
+		            axisTick:{
+		                show:true,
+		                 inside:false,
+		                //alignWithLabel: true,
+		                length:10
+		            },
+		            bottom:10,
+		            axisLine:{
+		              onZero: false,
+		              show:true  
+		            },
+		            // splitArea:{
+		            //     show:true
+		            // },
+		            data : ['a公司','b公司','c公司','a公司','b公司','c公司']
+		        }
+		    ],
+		    yAxis : [
+		        {
+		            type : 'value'
+		        }
+		    ],
+		    series : [
+		        {
+		            name:'蒸发量',
+		            type:'bar',
+		            data:[3.3,23,12,45,34,33,23,12,12,53,26,34,
+		            ,23,12,45,34,33,23,12,12,53,26,34,
+		            ,23,12,45,34,33,23,12,12,53,26,34,
+		            ,23,12,45,34,33,23,12,12,53,26,34,
+		            ,23,12,45,34,33,23,12,12,53,26,34,
+		            ,23,12,45,34,33,23,12,12,53,26,34],
+		        }
+		    ]
+		};
+		myChart.setOption(option);
+	</script>
+</body>
+</html>

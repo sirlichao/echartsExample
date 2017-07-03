@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>单一维度对应多量度</title>
+	<script src="../echarts/dist/echarts.js"></script>
+</head>
+<body>
+	<div id="echarts" style="height: 400px"></div>
+	<script>
+		let myChart = echarts.init(document.getElementById('echarts'));
+		let option = {
+	        title: {
+	        text: '台风各维度数据',
+	        x: 'center'
+		    },
+		    grid: [{
+		            // x: '7%',
+		            // y: '10%',
+		            //show: true,
+		            top: '9%',
+		            width: '100%',
+		            height: '22%',
+		            left: '5%',
+		            right:'50%'
+		            
+		        }, 
+		        {
+		            // x: '7%',
+		            // y: '10%',
+		            width: '100%',
+		            height: '22%',
+		            left: '5%',
+		            top: '40%',
+		        },
+		        {
+		            //show:true,
+		            // x: '7%',
+		            // y: '10%',
+		            width: '100%',
+		            height: '22%',
+		            left: '5%',
+		            top: '70%',
+		        },
+
+		    ],
+		    toolbox: {
+		        show : true,
+		        feature : {
+		            dataView : {show: true, readOnly: false},
+		            magicType : {show: true, type: [ 'bar','line']},
+		            restore : {show: true},
+		            saveAsImage : {show: true}
+		        }
+		    },
+		    tooltip: {
+		        formatter: 'Group {a}: ({c})'
+		    },
+		    xAxis: [{
+		            gridIndex: 0,
+		            type: 'category',
+		            min: 0,
+		            max: 8,
+		            axisLabel: {
+		                show: false
+		            }, //不显示坐标值
+		            splitLine: {
+		                show: false
+		            }, //不显示区域分割线
+		            axisTick: {
+		                show: false
+		            }, //不显示刻度
+		            data: ['台风1', '台风2', '台风3', '台风4', '台风5', '台风6', '台风8','台风9']
+		        }, {
+		            gridIndex: 1,
+		            type: 'category',
+		            min: 0,
+		            max: 8,
+		            axisLabel: {
+		                show: false
+		            }, //不显示坐标值
+		            splitLine: {
+		                show: false
+		            }, //不显示区域分割线
+		            axisTick: {
+		                show: false
+		            }, //不显示刻度
+		            data: ['台风1', '台风2', '台风3', '台风4', '台风5', '台风6', '台风8','台风9']
+		        },
+		        {
+		            gridIndex: 2,
+		            type: 'category',
+		            min: 0,
+		            max: 8,
+		            axisLabel: {
+		                show: true
+		            }, //不显示坐标值
+		            splitLine: {
+		                show: false
+		            }, //不显示区域分割线
+		            axisTick: {
+		                show: true
+		            }, //不显示刻度
+		            
+		            data: ['台风1', '台风2', '台风3', '台风4', '台风5', '台风6', '台风8','台风9']
+		        }
+
+		    ],
+		    yAxis: [{
+		            gridIndex: 0,
+		            type: 'value',
+		            name: '移动速度（公里/小时）',
+		            nameLocation: 'middle',
+		            nameGap: 25,
+		            position: 'left',
+		            min: 0,
+		            max: 15,
+		        },
+
+		        {
+		            gridIndex: 1,
+		            type: 'value',
+		            name: '气压（百帕）',
+		            nameLocation: 'middle',
+		            nameGap: 25,
+		            position: 'left',
+		            min: 0,
+		            max: 15,
+		        },
+		        {
+		            gridIndex: 2,
+		            type: 'value',
+		            name: '气压（百帕）',
+		            nameLocation: 'middle',
+		            nameGap: 25,
+		            position: 'left',
+		            min: 0,
+		            max: 15,
+		        },
+
+		    ],
+		    series: [{
+		        name: 'I',
+		        type: 'bar',
+		        xAxisIndex: 0,
+		        yAxisIndex: 0,
+		        
+		        data: [1, 2, 3, 4, 5,6,7,8]
+
+		    }, {
+		        name: 'II',
+		        type: 'bar',
+		        xAxisIndex: 1,
+		        yAxisIndex: 1,
+		        data: [2, 4, 5,3 ,1,4,9,5]
+		    },
+		    {
+		        name: 'II2',
+		        type: 'bar',
+		        xAxisIndex: 2,
+		        yAxisIndex: 2,
+		        data: [2, 4, 5,3 ,1,4,9,5]
+
+		    },
+		    ]
+	};
+	myChart.setOption(option);
+	</script>
+</body>
+</html>

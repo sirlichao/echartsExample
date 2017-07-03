@@ -1,0 +1,52 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+<meta charset="utf-8"/>  
+<title>异步加载</title>  
+<script type="text/javascript">  
+function initialize() {  
+	  var mp = new BMap.Map('map');  
+	  //mp.centerAndZoom(new BMap.Point(121.491, 31.233), 11);
+	  var point = new BMap.Point(121.491, 31.233);    
+	  mp.centerAndZoom(point, 11);   
+	  var marker = new BMap.Marker(point);        // 创建标注 
+	  marker.addEventListener("click", function(){    
+	  		alert("您点击了标注");    
+	  });
+	  marker.enableDragging();    
+		marker.addEventListener("dragend", function(e){    
+		alert("当前位置：" + e.point.lng + ", " + e.point.lat);    
+	  })   
+	  mp.addOverlay(marker); 
+	  mp.addControl(new BMap.NavigationControl());
+	  mp.addControl(new BMap.OverviewMapControl());
+	  mp.addControl(new BMap.ScaleControl());
+	  mp.addControl(new BMap.MapTypeControl());
+	  mp.addControl(new BMap.CopyrightControl());
+	  mp.addControl(new BMap.GeolocationControl());
+	  mp.enableScrollWheelZoom();//启动鼠标滚轮缩放地图
+	  mp.enableKeyboard();//启动键盘操作地图
+	  mp.setCurrentCity("成都");
+	  var polyline = new BMap.Polyline([    
+        new BMap.Point(116.399, 39.910),    
+        new BMap.Point(116.405, 39.920)    
+ 	  ],    
+      {strokeColor:"blue", strokeWeight:6, strokeOpacity:0.5}    
+     );    
+     mp.addOverlay(polyline);
+}  
+   
+function loadScript() {  
+  var script = document.createElement("script");  
+  script.src = "http://api.map.baidu.com/api?v=2.0&ak=OMuMGvRYXzKHztns51km4zDHc3la8le2&callback=initialize";//此为v2.0版本的引用方式  
+  // http://api.map.baidu.com/api?v=1.4&ak=您的密钥&callback=initialize"; //此为v1.4版本及以前版本的引用方式  
+  document.body.appendChild(script);  
+}  
+   
+window.onload = loadScript;  
+</script>  
+</head>  
+<body>  
+  <div id="map" style="height:500px"></div>  
+</body>  
+</html>
